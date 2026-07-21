@@ -28,7 +28,10 @@ const app = express();
 
 // Configure CORS
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow all origins for dev
+    callback(null, true);
+  },
   credentials: true
 }));
 
@@ -72,7 +75,7 @@ app.use('/api/billing', billingRoutes);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   }
@@ -143,7 +146,7 @@ import { startSLACheckJob } from './jobs/slaCheck.js';
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running in development mode on port ${PORT}`);
 
   // Start SLA escalation check job (every 60 seconds for demo)

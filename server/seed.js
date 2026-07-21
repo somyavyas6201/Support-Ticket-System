@@ -385,6 +385,7 @@ const seedDatabase = async () => {
     // 10. Seed Invoices (2 enterprise client invoices)
     const invoicesData = [
       {
+        invoiceNumber: 'INV-SEED-001',
         client: custJohn._id,
         billingPeriodStart: new Date(2026, 5, 1),
         billingPeriodEnd: new Date(2026, 5, 30),
@@ -399,6 +400,7 @@ const seedDatabase = async () => {
         ]
       },
       {
+        invoiceNumber: 'INV-SEED-002',
         client: custAlice._id,
         billingPeriodStart: new Date(2026, 5, 1),
         billingPeriodEnd: new Date(2026, 5, 30),
